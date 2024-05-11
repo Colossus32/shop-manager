@@ -7,6 +7,8 @@ interface ProductRepository {
 
     fun getAllProducts(): List<Product>
     fun save(product: Product): Product
+
+    fun updateProduct(product: Product)
     fun findById(productId: Long): Optional<Product>
 
     fun deleteById(productId: Long)

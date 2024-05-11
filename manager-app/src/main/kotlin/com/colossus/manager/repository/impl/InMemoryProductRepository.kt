@@ -28,6 +28,11 @@ class InMemoryProductRepository: ProductRepository {
         return product
     }
 
+    override fun updateProduct(product: Product) {
+        products.add(product)
+    }
+
+
     override fun findById(productId: Long): Optional<Product> {
         return products.stream()
             .filter { product -> product.id == productId }

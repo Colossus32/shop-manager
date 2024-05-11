@@ -24,7 +24,7 @@ class DefaultProductService(private val productRepository: ProductRepository): P
         val product = productRepository.findById(productId).orElseThrow { RuntimeException("Product not found") }
         val updatedProduct = product.copy(title = title, details = details)
         productRepository.deleteById(productId)
-        productRepository.save(updatedProduct)
+        productRepository.updateProduct(updatedProduct)
         return updatedProduct
     }
 
