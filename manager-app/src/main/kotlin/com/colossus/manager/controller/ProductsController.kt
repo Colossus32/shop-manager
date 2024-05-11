@@ -4,14 +4,12 @@ import com.colossus.manager.entity.Product
 import com.colossus.manager.service.ProductService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.*
 
 @Controller
 @RequestMapping("catalogue/products")
 class ProductsController(private val productService: ProductService) {
+
 
     @GetMapping("/list")
     fun getProductsList(model: Model): String {
@@ -27,6 +25,7 @@ class ProductsController(private val productService: ProductService) {
     @PostMapping("/create")
     fun createNewProduct(@RequestParam("title") title: String, @RequestParam("details") details: String): String {
         val product: Product = productService.createProduct(title, details)
-        return "redirect:/catalogue/products/list"
+        return "redirect:/catalogue/products/%d".format(product.id)
     }
+
 }

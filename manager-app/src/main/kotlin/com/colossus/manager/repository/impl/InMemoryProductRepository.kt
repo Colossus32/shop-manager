@@ -21,11 +21,20 @@ class InMemoryProductRepository: ProductRepository {
 
     override fun save(product: Product): Product {
         product.id = products.stream()
-            .map(Product::id)
-            .max(Comparator.naturalOrder<Long?>()?.reversed())
-            .orElse(products.size.toLong())?.plus(1)
+            .mapToLong { p -> p.id!! }
+            .max().orElse(products.size.toLong()) + 1
 
         products.add(product)
         return product
+    }
+
+    override fun findById(productId: Long): Optional<Product> {
+        return products.stream()
+            .filter { product -> product.id == productId }
+            .findFirst()
+    }
+
+    override fun deleteById(productId: Long) {
+        products.removeIf { product -> product.id == productId }
     }
 }
