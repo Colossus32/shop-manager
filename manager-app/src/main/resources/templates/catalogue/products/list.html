@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Products list &ndash; Shop</title>
+</head>
+<body>
+<a href="/catalogue/products/create">&lAarr; Create a new product</a>
+<h1>Products list</h1>
+<table>
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Title</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each = "product : ${products}">
+        <td th:text="${product.id}"></td>
+        <td>
+            <a th:href="@{/catalogue/products/{id}(id=${product.id})}" th:text="${product.title}"></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
